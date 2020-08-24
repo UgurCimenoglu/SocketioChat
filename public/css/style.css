@@ -32,11 +32,14 @@ a {
 .btn {
 	cursor: pointer;
 	padding: 10px 15px;
-	background: var(--light-color);
+	background: #f4f9ff;
 	color: var(--dark-color-a);
 	border: 0;
 	font-size: 17px;
+	border-radius: 8px;
+	transition: all .5s;
 }
+
 
 /* Chat Page */
 
@@ -193,10 +196,12 @@ a {
 	.btn {
 		cursor: pointer;
 		padding: 8px 12px;
-		background: var(--light-color);
-		color: var(--dark-color-a);
 		border: 0;
 		font-size: 15px;
+		border-radius: 8px;
+		background: #f4f9ff;
+		color: var(--dark-color-a);
+		transition: all .5s;
 	}
 
 	.chat-header h1 {
@@ -218,6 +223,6 @@ a {
 	}
 
 	#msg{
-		width: 50%;
+		width: 100%;
 	}
 }
