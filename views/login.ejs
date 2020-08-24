@@ -1,0 +1,77 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Giriş Sayfası</h1>
+
+    <form action="/login" method="POST">
+        <div>
+            <label for="email">E-Mail</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <button type="submit">Giris</button>
+        <a href="/register">Üye Ol!</a>
+    </form>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/login.css">
+    
+</head>
+<body>
+    <div class="sidenav">
+        <div class="login-main-text">
+           <h2>Uğur ÇİMENOĞLU <br> Tunahan ORHAN <br> Bitirme Tezi Giriş Sayfası</h2>
+           <p>Mesajlaşma Uygulaması</p>
+        </div>
+     </div>
+     <div class="main">
+        <div class="col-md-6 col-sm-12">
+           <div class="login-form">
+              <form action="/login" method="POST">
+                <div>
+                    <% if (sessionFlash) { %>
+                        <h2><%= sessionFlash.message %></h2>
+                      <% } %>
+                </div>
+                 <div class="form-group">
+                    <label for="email">E-Mail</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="E-Mail Giriniz..." required>
+                 </div>
+                 <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Şifre Giriniz" required>
+                 </div>
+                 <button type="submit" class="btn btn-black">Giriş</button>
+                 <button type="button" class="btn btn-secondary"><a href="/register">Üye Ol!</a></button>
+              </form>
+              
+           </div>
+        </div>
+     </div>
+
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>
+
