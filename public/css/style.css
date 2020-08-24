@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-	--dark-color-a: #667aff;
-	--dark-color-b: #7386ff;
+	--dark-color-a: #3b80cf; /*#667aff*/
+	--dark-color-b: #2c63a1;
 	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
@@ -31,7 +31,7 @@ a {
 
 .btn {
 	cursor: pointer;
-	padding: 5px 15px;
+	padding: 10px 15px;
 	background: var(--light-color);
 	color: var(--dark-color-a);
 	border: 0;
@@ -192,7 +192,7 @@ a {
 
 	.btn {
 		cursor: pointer;
-		padding: 0 12px;
+		padding: 8px 12px;
 		background: var(--light-color);
 		color: var(--dark-color-a);
 		border: 0;
@@ -211,5 +211,13 @@ a {
 
 	.btn-out{
 		padding: 5px 20px;
+	}
+
+	.btn-send{
+		padding:4px 8px;	
+	}
+
+	#msg{
+		width: 50%;
 	}
 }
