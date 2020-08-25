@@ -53,6 +53,7 @@ function outputMessage(message){
     <p class="text">
         ${message.text}
     </p>`;
+    console.log(message.time)
     document.querySelector('.chat-messages').appendChild(div); // oluşturduğum Div'i .chat-message classına child olarak ekliyorum.
 }
 
