@@ -4,7 +4,7 @@ const app = express();
 const server = http.createServer(app);
 const socketio = require('socket.io'); //socket.io modülünü dahil ettik.
 const io = socketio(server); //Socket.io'yu Servere Bağladık.
-const formatMessage = require('./utils/message'); //formatMessage fonksiyonunu çağırdık.
+const {formatMessage,databaseMessage} = require('./utils/message'); //formatMessage fonksiyonunu çağırdık.
 const {userJoin , getCurrentUser, userLeave, getRoomUsers} = require('./utils/users'); 
 const PORT = process.env.PORT || 3000;
 const expressSession = require('express-session');
@@ -14,6 +14,7 @@ const MongoStore = require('connect-mongo')(expressSession);
 const mongoose = require('mongoose');   
 const Users = require('./models/Users');
 const users = require('./utils/users');
+const Messages = require('./models/Messages');
 
 
 const MongoClient = require('mongodb').MongoClient;
@@ -157,9 +158,20 @@ io.on('connection' , socket =>{
     //Ön Yüzden Gelen kullaniciadi ve oda  bilgilerini aldık.
     socket.on('JoinRoom' , ({username , room})=>{
 
+        //Odaya giren kişinin id'si kullanici adını ve girdiği odanın adını alıyoruz.
         const user = userJoin(socket.id, username, room);
-    
         socket.join(user.room);
+
+        //veritabanında girilen odanın mesajlarını alıyoruz. Map ile gelen her verideki elemanı sırasıyla liteliyorum.
+        Messages.find({room:user.room},(err,data)=>{
+            const veri = data.map(veriler=>{
+                io.to(user.room).emit('message' , databaseMessage(veriler.username,veriler.text,veriler.time)) //io.emit sockete bağlı herkese mesajı yollar, yollayan da dahil.
+            })
+            
+        })
+
+        
+
 
 
         // Emit, Sockete bağlı herkese yollar.
@@ -170,10 +182,10 @@ io.on('connection' , socket =>{
 
         //Kullanici ve Oda Bilgisi Cliente Yollama
         io.to(user.room).emit('roomUsers' , {
-        room:user.room,
-        users:getRoomUsers(user.room)
+            room:user.room,
+            users:getRoomUsers(user.room)
+        });
     });
-});
 
 
 
@@ -197,8 +209,21 @@ io.on('connection' , socket =>{
     socket.on("chatMessage" , msg=>{
 
         const user = getCurrentUser(socket.id);
+        const mesaj = formatMessage(user.username,msg);
 
         io.to(user.room).emit('message' , formatMessage(user.username,msg)) //io.emit sockete bağlı herkese mesajı yollar, yollayan da dahil.
+
+        //Ön yüzden gelen mesajı veritabanına kaydediyoruz.
+        const Message = new Messages({
+            username : mesaj.username,
+            text : mesaj.text,
+            time : mesaj.time,
+            room : user.room
+        })
+
+        Message.save((err,data)=>{
+
+        })
     });
 });
 

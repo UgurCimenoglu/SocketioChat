@@ -6,7 +6,19 @@ function formatMessage(username,text){
         username,
         text,
         time:moment().format('h:mm a')
+        
     }
 }
 
-module.exports = formatMessage;
+function databaseMessage(username,text,time){
+    return {
+        username,
+        text,
+        time,
+    }
+}
+
+module.exports = {
+    formatMessage,
+    databaseMessage
+};

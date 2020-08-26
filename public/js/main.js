@@ -14,13 +14,13 @@ const socket = io.connect();
 socket.on('roomUsers' , ({room,users})=> {
     outputRoomName(room);
     outputUser(users);
-    
+
 })
 
 //Oda Ve İsim Bilgisi Alıp Servera Yolluyoruz.
 socket.emit("JoinRoom", {username,room});
 
-//Serverden Gelen Mesajı Alıyoruz.
+//Serverden Gelen bildirim Mesajlarını Alıyoruz.
 socket.on('message' , message=>{
     outputMessage(message);
     bildirim();
@@ -28,8 +28,6 @@ socket.on('message' , message=>{
     //Scroll Bar'ın Hep En Aşağıda Kalmasını Sağladık.
     chatMessages.scrollTop = chatMessages.scrollHeight;
 })
-
-
 
 
 //Bu Fonksiyon Form Submit Olduğu Zaman Sayfa Refresh'i engelleyecek.
@@ -53,9 +51,9 @@ function outputMessage(message){
     <p class="text">
         ${message.text}
     </p>`;
-    console.log(message.time)
     document.querySelector('.chat-messages').appendChild(div); // oluşturduğum Div'i .chat-message classına child olarak ekliyorum.
 }
+
 
 //Room ismini DOM a Ekleme
 function outputRoomName(room){
